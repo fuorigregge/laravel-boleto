@@ -244,7 +244,8 @@ class Santander extends AbstractRemessa implements RemessaContract
 
     public function isValid()
     {
-        if(empty($this->getCodigoCliente()) || !parent::isValid())
+        $codigoCliente = $this->getCodigoCliente();
+        if(empty($codigoCliente) || !parent::isValid())
         {
             return false;
         }
