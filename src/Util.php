@@ -351,7 +351,8 @@ final class Util
      */
     public static function nFloat($number, $decimals = 2, $showThousands = false)
     {
-        if (is_null($number) || empty(self::onlyNumbers($number))) {return '';}
+        $onlyNumbers = self::onlyNumbers($number);
+        if (is_null($number) || empty($onlyNumbers)) {return '';}
         $pontuacao = preg_replace('/[0-9]/', '', $number);
         $locale = (substr($pontuacao, -1, 1) == ',') ? "pt-BR" : "en-US";
         $formater = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
@@ -377,7 +378,8 @@ final class Util
      */
     public static function nReal($number, $decimals = 2, $symbol = true, $fixed = true)
     {
-        if (is_null($number) || empty(self::onlyNumbers($number))) {return '';}
+        $onlyNumbers = self::onlyNumbers($number);
+        if (is_null($number) || empty($onlyNumbers)) {return '';}
         $formater = new \NumberFormatter("pt-BR", \NumberFormatter::CURRENCY);
         $formater->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, ($fixed ? $decimals : 1));
         if ($decimals === false) {
